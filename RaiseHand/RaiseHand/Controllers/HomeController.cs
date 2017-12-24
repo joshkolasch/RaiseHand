@@ -29,7 +29,13 @@ namespace RaiseHand.Controllers
 
         public ActionResult HandRaised()
         {
-            ViewBag.Message = "Your hand is raised";
+            ViewBag.Message = "Your hand is raised page.";
+            return View();
+        }
+
+        public ActionResult HandLowered()
+        {
+            ViewBag.Message = "Your hand lowered response page.";
             return View();
         }
     }
