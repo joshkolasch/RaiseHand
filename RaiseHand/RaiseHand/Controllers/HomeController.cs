@@ -26,5 +26,11 @@ namespace RaiseHand.Controllers
 
             return View();
         }
+
+        public ActionResult HandRaised()
+        {
+            ViewBag.Message = "Your hand is raised";
+            return View();
+        }
     }
 }

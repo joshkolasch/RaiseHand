@@ -3,5 +3,53 @@
     ViewBag.Title = "HandRaised";
 }
 
-<h2>HandRaised</h2>
+<div class="banner">
+    <img src="~/Content/Images/hands_colorful.png" alt="Hands Image" style="width:40%; height:auto;" />
+</div>
+<div class="jumbotron">
+    @*<p class="raise-hand-banner"> <img src="~/Content/Images/hands_colorful.png" alt="Hands Image" /></p>*@
+    <h1>Raise Hand</h1>
+    <p class="lead">Get help quick. Raise your hand here. (Workshop this phrase)</p>
+</div>
 
+<div class="row">
+    <p class="response" style="color:deepskyblue;">
+        Your hand is raised. A tutor will get to you as soon as possible.
+    </p>
+</div>
+
+<div class="row">
+    <div class="row toprow">
+        <div class="col-md-4">
+            <p> Your Ticket is:</p>
+            <h3 style="color:red;">A11</h3>
+        </div>
+        <div class="col-md-4">
+            <p>There are</p>
+            <h4 class="position-in-line" style="color:red;">9</h4>
+            <p>ahead of you</p>
+        </div>
+        <div class="col-md-4">
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865" style="background-color:dodgerblue; color:white;">Helped</a></p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865" style="background-color:dodgerblue; color:white;">Nevermind</a></p>
+        </div>
+        <br />
+        <br />
+    </div>
+    <div class="row bottomrow">
+        <div class="col-md-8">
+            @Html.DropDownList("Location", new List<SelectListItem>
+            {
+                new SelectListItem{Text="Location", Value="null" },
+                new SelectListItem{Text="T1", Value="T1"},
+                new SelectListItem{Text="T2", Value="T2"},
+                new SelectListItem{Text="T3", Value="T3"},
+                new SelectListItem{Text="Comp1", Value="C3"},
+            })
+            <br />
+        </div>
+        <div class="col-md-4">
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865" style="background-color:dodgerblue; color:white;">Change Location</a></p> 
+        </div>
+    </div>
+</div>
