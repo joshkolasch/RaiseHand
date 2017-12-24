@@ -38,5 +38,11 @@ namespace RaiseHand.Controllers
             ViewBag.Message = "Your hand lowered response page.";
             return View();
         }
+
+        public ActionResult Feedback()
+        {
+            ViewBag.Message = "Your feedback page.";
+            return View();
+        }
     }
 }
