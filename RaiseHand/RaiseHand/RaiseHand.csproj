@@ -210,6 +210,8 @@
     <Content Include="Views\Home\HandRaised.cshtml" />
     <Content Include="Views\Home\HandLowered.cshtml" />
     <Content Include="Views\Home\Feedback.cshtml" />
+    <Content Include="Views\Tickets\Home.cshtml" />
+    <Content Include="Views\Tickets\HandRaised.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

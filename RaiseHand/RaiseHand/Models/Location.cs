@@ -6,10 +6,12 @@ using System.Web;
 
 namespace RaiseHand.Models
 {
+    //Location of student requesting help
     [Table("Location")]
     public class Location
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Web;
 
 namespace RaiseHand.Models
 {
+    //Reason ticket was resolved
     [Table("ReasonLowered")]
     public class ReasonLowered
     {

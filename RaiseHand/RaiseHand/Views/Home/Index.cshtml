@@ -1,4 +1,6 @@
-﻿@{
+﻿@model RaiseHand.Models.Ticket
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -122,6 +124,8 @@
             <br />
         </div>
     </div>
+
+   
 
     <div class="col-md-4">
         <p><a class="btn btn-default" href="~/Home/HandRaised" style="background-color:dodgerblue; color:white;">Raise Hand</a></p>
@@ -1084,36 +1088,36 @@
             var allLocations = document.getElementsByClassName("location");
             for(i = 0; i < allLocations.length; i++){
             allLocations[i].addEventListener("click", doSomething);
-            var locationDropdown = document.getElementById("Location");
-            locationDropdown.addEventListener("change", doDropdownStuff);
-
-
-            function selectLocation(value){
-            document.getElementById('Location').value = value;
-            var temp = document.getElementById(value);
-            document.getElementById('demo-box').innerHTML = temp.id;
+        var locationDropdown = document.getElementById("Location");
+        locationDropdown.addEventListener("change", doDropdownStuff);
             }
 
+    function selectLocation(value){
+        document.getElementById('Location').value = value;
+        var temp = document.getElementById(value);
+        document.getElementById('demo-box').innerHTML = temp.id;
+    }
 
-            }
 
-            function doSomething(){
-            var allLocations = document.getElementsByClassName("location");
-            for(i = 0; i < allLocations.length; i++){
+
+
+    function doSomething(){
+        var allLocations = document.getElementsByClassName("location");
+        for(i = 0; i < allLocations.length; i++){
             allLocations[i].style.fill = '#d3d3d3';
-            }
-            this.style.fill='red';
-            }
+        }
+        this.style.fill='red';
+    }
 
-            function doDropdownStuff(){
+    function doDropdownStuff(){
 
-                var allLocations = document.getElementsByClassName("location");
-                for(i = 0; i < allLocations.length; i++){
-                    allLocations[i].style.fill = '#d3d3d3';
-                }
-                var element = document.getElementById(this.value);
-                element.style.fill = 'red';
-            }
+        var allLocations = document.getElementsByClassName("location");
+        for(i = 0; i < allLocations.length; i++){
+            allLocations[i].style.fill = '#d3d3d3';
+        }
+        var element = document.getElementById(this.value);
+        element.style.fill = 'red';
+    }
 
 
             @*function LocationSelected(value){

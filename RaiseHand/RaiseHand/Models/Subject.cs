@@ -6,6 +6,7 @@ using System.Web;
 
 namespace RaiseHand.Models
 {
+    //Course subject names
     [Table("Subject")]
     public class Subject
     {

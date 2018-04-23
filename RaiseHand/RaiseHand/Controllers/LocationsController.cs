@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RaiseHand.Models;
 
+//This whole controller might need to be re-vamped with the new changes to the id being an nvarchar(50) instead of int
 namespace RaiseHand.Controllers
 {
     public class LocationsController : Controller
