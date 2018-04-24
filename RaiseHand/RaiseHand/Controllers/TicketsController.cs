@@ -194,18 +194,22 @@ namespace RaiseHand.Controllers
                 return HttpNotFound();
             }
 
-            var inactiveStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
+            var inactiveStatus = db.Statuses.Where(x => x.Name == "Inactive").First().Id;
             if (ticket.StatusId == inactiveStatus)
             {
                 //Ticket has been rendered inactive.
                 //TODO: consider outputting a message that says this ticket has been removed?
                 return HttpNotFound();
             }
+
             var totalHandsRaised = CountHandsRaised();
             ViewBag.HandCount = totalHandsRaised;
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ticket.LocationId);
+            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
+
             return View(ticket);
         }
-
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HandRaised([Bind(Include = "LocationId, SubjectId")]Ticket ticket)
@@ -269,6 +273,7 @@ namespace RaiseHand.Controllers
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
             return View(ticket);
         }
+        */
 
         // GET: Tickets/Details/5
         public ActionResult HandLowered(int? id)                        
@@ -285,8 +290,7 @@ namespace RaiseHand.Controllers
             return View(ticket);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //TODO: I couldn't get this to run as an HttpPost. Should I be doing this as a post? There is no form necessary. Also, for Nevermind() and Unhelped() actionlinks.
         public ActionResult Helped(int? id)
         {
             if (id == null)
@@ -314,11 +318,10 @@ namespace RaiseHand.Controllers
 
             db.Entry(ticket).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Feedback", "HomeController");
+            return RedirectToAction("Feedback", "Home");
         }
+        
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Nevermind(int? id)
         {
             if (id == null)
@@ -348,8 +351,7 @@ namespace RaiseHand.Controllers
             return RedirectToAction("Home");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
         public ActionResult Unhelped(int? id)
         {
             if (id == null)
@@ -376,7 +378,7 @@ namespace RaiseHand.Controllers
 
             db.Entry(ticket).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Feedback", "HomeController");
+            return RedirectToAction("Feedback", "Home");
         }
 
         [HttpPost]
@@ -393,15 +395,22 @@ namespace RaiseHand.Controllers
                     db.Entry(ticket).State = EntityState.Modified;
                     db.SaveChanges();
 
+                    //if user's ticket is still active, update their browswer
                     if(oldticket.StatusId == activeStatus)
                     {
                         return RedirectToAction("HandRaised", new { id = ticket.Id });
+                    }
+                    //if user's ticket has been taken down for some reason, have them verify the status of their ticket.
+                    else
+                    {
+                        return RedirectToAction("HandLowered", new { id = ticket.Id });
                     }
 
                 }
                 else
                 {
                     //TODO: Send a message saying "change your location please"
+                    //Note: this should probably already be handled client-side
                 }
             }
 
@@ -417,11 +426,108 @@ namespace RaiseHand.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ticket).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("HandRaised", new { id = ticket.Id });
+                var oldticket = db.Tickets.Find(ticket.Id);
+                var activeStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
+
+                if (oldticket.SubjectId != ticket.SubjectId)
+                {
+                    db.Entry(ticket).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    //if user's ticket is still active, update their browswer
+                    if (oldticket.StatusId == activeStatus)
+                    {
+                        return RedirectToAction("HandRaised", new { id = ticket.Id });
+                    }
+                    //if user's ticket has been taken down for some reason, have them verify the status of their ticket.
+                    else
+                    {
+                        return RedirectToAction("HandLowered", new { id = ticket.Id });
+                    }
+
+                }
+                else
+                {
+                    //TODO: Send a message saying "change your location please"
+                    //Note: this should probably already be handled client-side
+                }
             }
-            return View();
+
+            //Invalid State, return the ticket to the student
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ticket.LocationId);
+            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
+            return View(ticket);
+        }
+
+        public ActionResult TicketManager()
+        {
+            var activeStatus = db.Statuses.Where(s => s.Name == "Active").First().Id;
+            var allTickets = db.Tickets.Include(t => t.Location).Include(t => t.ReasonLowered).Include(t => t.Status).Include(t => t.Subject);
+            var activeTickets = allTickets.Where(t => t.StatusId == activeStatus).OrderBy(t => t.TimeRaised).OrderBy(t => t.Number);
+
+            return View(activeTickets.ToList());
+        }
+
+        //Tutor selected 'Helped' from the TicketManager page
+        //Update the database if necessary and refresh the TicketManager page
+        public ActionResult TutorHelped(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ticket ticket = db.Tickets.Find(id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+
+            var tutorHelpedReasonId = db.ReasonsLowered.Where(x => x.Name == "TutorSelectedHelped").First().Id;
+            var inactiveStatus = db.Statuses.Where(x => x.Name == "Inactive").First().Id;
+            var activeStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
+            var oldticket = db.Tickets.Find(ticket.Id);
+
+            if (oldticket.StatusId == activeStatus)
+            {
+                ticket.ReasonLoweredId = tutorHelpedReasonId;
+                ticket.StatusId = inactiveStatus;
+                ticket.TimeLowered = DateTime.Now;
+            }
+
+            db.Entry(ticket).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("TicketManager", "Tickets");
+        }
+
+        //Tutor selected 'Not Found' from the TicketManager page
+        //Update the database if necessary and refresh the TicketManager page
+        public ActionResult NotFound(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ticket ticket = db.Tickets.Find(id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+
+            var notFoundReasonId = db.ReasonsLowered.Where(x => x.Name == "TutorSelectedNotFound").First().Id;
+            var inactiveStatus = db.Statuses.Where(x => x.Name == "Inactive").First().Id;
+            var activeStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
+            var oldticket = db.Tickets.Find(ticket.Id);
+
+            if (oldticket.StatusId == activeStatus)
+            {
+                ticket.ReasonLoweredId = notFoundReasonId;
+                ticket.StatusId = inactiveStatus;
+                ticket.TimeLowered = DateTime.Now;
+            }
+
+            db.Entry(ticket).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("TicketManager", "Tickets");
         }
 
         //TODO: This method should be replaced with a better method of generating/selecting ticket numbers to issue to students

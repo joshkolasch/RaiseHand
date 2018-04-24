@@ -18,19 +18,21 @@
 
     <div>
         <p>Your Ticket Number is:</p>
-        <h2>Html.DisplayFor(model => model.Number)</h2>
+        <h2>@Html.DisplayFor(model => model.Number)</h2>
         <p>Location:</p>
-        <h3>Html.DisplayFor(model => model.Location.Name)</h3>
+        <h3>@Html.DisplayFor(model => model.Location.Name)</h3>
+        <p>Number of other hands raised:</p>
+        <h3>@ViewBag.HandCount</h3>
     </div>
 
     <div class="row">
         <div class="col-md-4">
-            <button>Helped</button>
-            <button>Nevermind</button>
-            <button>Not Helped</button>
+            @Html.ActionLink("Helped", "Helped", "Tickets", new { Model.Id }, new { @class = "btn btn-info", @id = "helpedButton"})
+            @Html.ActionLink("Nevermind", "Nevermind", "Tickets", new { Model.Id }, new { @class = "btn btn-info", @id = "nevermindButton" })
+            @Html.ActionLink("Unhelped", "Unhelped", "Tickets", new { Model.Id }, new { @class = "btn btn-info", @id = "unhelpButton" })
         </div>
         <div class="col-md-4">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("ChangeSubject", "Tickets", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
@@ -57,7 +59,7 @@
         </div>
 
         <div class="col-md-4">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("ChangeLocation", "Tickets", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
@@ -84,33 +86,5 @@
         </div>
     </div>
 
-
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Location.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location.Name)
-        </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Subject.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Subject.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Number)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Number)
-        </dd>
-        
-    </dl>
 </div>
 

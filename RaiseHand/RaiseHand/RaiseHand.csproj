@@ -212,6 +212,7 @@
     <Content Include="Views\Home\Feedback.cshtml" />
     <Content Include="Views\Tickets\Home.cshtml" />
     <Content Include="Views\Tickets\HandRaised.cshtml" />
+    <Content Include="Views\Tickets\TicketManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

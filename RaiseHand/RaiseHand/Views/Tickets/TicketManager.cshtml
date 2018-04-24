@@ -1,0 +1,71 @@
+﻿@model RaiseHand.Models.Ticket
+
+@{
+    ViewBag.Title = "TicketManager";
+}
+
+<h2>TicketManager</h2>
+
+<div>
+    <h4>Ticket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReasonLowered.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReasonLowered.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeRaised)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeRaised)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeLowered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeLowered)
+        </dd>
+        @Html.ActionLink("Helped", "TutorHelped", "Tickets", new { id = Model.Id }, new { @class = "btn btn-default", @style = "margin-left:15%;" })
+        @Html.ActionLink("NotFound", "NotFound", "Tickets", new { id = Model.Id }, new { @class = "btn btn-default", @style = "margin-left:15%;" })
+    </dl>
+</div>
