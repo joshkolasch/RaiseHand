@@ -8,12 +8,11 @@
 </div>
 <div class="jumbotron">
     @*<p class="raise-hand-banner"> <img src="~/Content/Images/hands_colorful.png" alt="Hands Image" /></p>*@
-    <h2>Feedback</h2>
+    <h2>Leave us feedback.</h2>
 </div>
 
 
 <div class="row">
-    <h3>Leave us feedback.</h3>
     <p>We listen to your voices and want to know what you think.</p>
     <p>This is a new service and you can help us improve it.</p>
     <br />
@@ -23,5 +22,7 @@
     <p>
         Insert Comment Box here:
     </p>
-    <a href="~/Home/Index">Back to homepage</a>
+    <br />
+    @Html.ActionLink("Home", "Home", "Tickets", new { @class = "btn btn-primary" })
+
 </div>
