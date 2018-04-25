@@ -1,0 +1,59 @@
+﻿@model IEnumerable<RaiseHand.Models.Ticket>
+
+@{
+    ViewBag.Title = "TicketManager";
+}
+
+<h2>Ticket Manager</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeRaised)
+            </th>
+            <th>
+                <!--Empty table header to extend width of top borderline-->
+            </th>
+            <th>
+                <!--Empty table header to extend width of top borderline-->
+            </th>
+        </tr>
+    @{foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeRaised)
+            </td>
+
+            <td>
+                @Html.ActionLink("Helped", "TutorHelped", "Tickets", new { id = item.Id }, new { @class = "btn btn-success" })
+            </td>
+            <td>
+                @Html.ActionLink("Not Found", "NotFound", "Tickets", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+        
+        }
+    }
+    </table>
+        
+</div>
