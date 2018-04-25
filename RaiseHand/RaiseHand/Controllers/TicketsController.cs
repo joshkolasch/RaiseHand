@@ -381,6 +381,10 @@ namespace RaiseHand.Controllers
             return RedirectToAction("Feedback", "Home");
         }
 
+
+        //TODO:This currently isn't functioning. I think the TicketId is null :( because the oldticket object is null
+        //I should probably change this so that I'm just sending the Id and passing a new LocationId through the ViewBag.
+        //I would probably have to compare the ViewBag.NewLocationId with the ticket.LocationId before sending it to the server to prevent a senseless transaction
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangeLocation([Bind(Include = "LocationId")]Ticket ticket)
@@ -395,7 +399,7 @@ namespace RaiseHand.Controllers
                     db.Entry(ticket).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    //if user's ticket is still active, update their browswer
+                    //if user's ticket is still active, update their browser
                     if(oldticket.StatusId == activeStatus)
                     {
                         return RedirectToAction("HandRaised", new { id = ticket.Id });
@@ -420,6 +424,7 @@ namespace RaiseHand.Controllers
             return View(ticket);
         }
 
+        //TODO:This currently isn't functioning. I think the TicketId is null :( because the oldticket object is null
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangeSubject([Bind(Include = "SubjectId")]Ticket ticket)
@@ -434,7 +439,7 @@ namespace RaiseHand.Controllers
                     db.Entry(ticket).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    //if user's ticket is still active, update their browswer
+                    //if user's ticket is still active, update their browser
                     if (oldticket.StatusId == activeStatus)
                     {
                         return RedirectToAction("HandRaised", new { id = ticket.Id });

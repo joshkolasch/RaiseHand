@@ -1,71 +1,59 @@
-﻿@model RaiseHand.Models.Ticket
+﻿@model IEnumerable<RaiseHand.Models.Ticket>
 
 @{
     ViewBag.Title = "TicketManager";
 }
 
-<h2>TicketManager</h2>
+<h2>Ticket Manager</h2>
 
 <div>
-    <h4>Ticket</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Location.Name)
-        </dt>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeRaised)
+            </th>
+            <th>
+                <!--Empty table header to extend width of top borderline-->
+            </th>
+            <th>
+                <!--Empty table header to extend width of top borderline-->
+            </th>
+        </tr>
+    @{foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeRaised)
+            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.Location.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReasonLowered.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReasonLowered.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Subject.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Subject.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Number)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Number)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeRaised)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeRaised)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeLowered)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeLowered)
-        </dd>
-        @Html.ActionLink("Helped", "TutorHelped", "Tickets", new { id = Model.Id }, new { @class = "btn btn-default", @style = "margin-left:15%;" })
-        @Html.ActionLink("NotFound", "NotFound", "Tickets", new { id = Model.Id }, new { @class = "btn btn-default", @style = "margin-left:15%;" })
-    </dl>
+            <td>
+                @Html.ActionLink("Helped", "TutorHelped", "Tickets", new { id = item.Id }, new { @class = "btn btn-success" })
+            </td>
+            <td>
+                @Html.ActionLink("Not Found", "NotFound", "Tickets", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+        
+        }
+    }
+    </table>
+        
 </div>
