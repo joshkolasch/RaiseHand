@@ -134,7 +134,10 @@
     <Compile Include="Controllers\ReasonLoweredsController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
+    <Compile Include="Controllers\TicketNumbersController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
+    <Compile Include="DAL\DbInitializer.cs" />
+    <Compile Include="DAL\RaiseHandContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -144,6 +147,7 @@
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TicketNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +172,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -213,6 +219,11 @@
     <Content Include="Views\Tickets\Home.cshtml" />
     <Content Include="Views\Tickets\HandRaised.cshtml" />
     <Content Include="Views\Tickets\TicketManager.cshtml" />
+    <Content Include="Views\TicketNames\Create.cshtml" />
+    <Content Include="Views\TicketNames\Delete.cshtml" />
+    <Content Include="Views\TicketNames\Details.cshtml" />
+    <Content Include="Views\TicketNames\Edit.cshtml" />
+    <Content Include="Views\TicketNames\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

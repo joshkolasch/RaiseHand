@@ -14,8 +14,8 @@ namespace RaiseHand.Controllers
     {
         private RaisedHandEntities db = new RaisedHandEntities();
 
-        private static int ticketNumberIndex = 0;
-        private string[] ticketNumbers = { "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3" };
+        //private static int ticketNumberIndex = 0;
+        //private string[] ticketNumbers = { "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3" };
         // GET: Tickets
         public ActionResult Index()
         {
@@ -161,18 +161,26 @@ namespace RaiseHand.Controllers
             if (ModelState.IsValid)
             {
                 //Generate the following below: TicketId, StatusId, Number, TimeRaised
-                ticket.Number = GenerateTicketNumber();
+                //Note:this is the GenerateTicketNumber 1.0
+                //ticket.Number = GenerateTicketNumber();
+                //GenerateTicketNumber 2.0
+                ticket.Number = GenerateTicketNumber(db.Tickets.Count());
                 var status = db.Statuses
                                 .Where(x => x.Name == "Active")
                                 .First();
                 
                 ticket.StatusId = status.Id;
-                var time = DateTime.Now;
+                DateTime universalTime = DateTime.UtcNow;
+
+                var time = universalTime;
                 ticket.TimeRaised = time;
 
 
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
+
+                
+
                 return RedirectToAction("HandRaised", new { id = ticket.Id });
             }
 
@@ -203,77 +211,14 @@ namespace RaiseHand.Controllers
             }
 
             var totalHandsRaised = CountHandsRaised();
-            ViewBag.HandCount = totalHandsRaised;
+            //subtract 1 from the handcount to exclude the users hand.
+            ViewBag.HandCount = totalHandsRaised - 1;
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ticket.LocationId);
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
 
             return View(ticket);
         }
-        /*
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult HandRaised([Bind(Include = "LocationId, SubjectId")]Ticket ticket)
-        {
-            if (ModelState.IsValid)
-            {
-                var oldticket = db.Tickets.Find(ticket.Id);
-
-                //User has changed their location or subject
-                if(oldticket.LocationId != ticket.LocationId || oldticket.SubjectId != ticket.SubjectId)
-                {
-                    ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ticket.LocationId);
-                    ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
-
-                    db.Entry(ticket).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                
-                //important status codes
-                //TODO: these should probably be kept as static values so that the database isn't constantly queried everytime a hand is raised or lowered.
-                var helpedStatus = db.ReasonsLowered.Where(x => x.Name == "StudentSelectedHelped").First().Id;
-                var nevermindStatus = db.ReasonsLowered.Where(x => x.Name == "StudentSelectedNevermind").First().Id;
-                var unhelpedStatus = db.ReasonsLowered.Where(x => x.Name == "StudentSelectedUnhelped").First().Id;
-                var inactiveStatus = db.Statuses.Where(x => x.Name == "Inactive").First().Id;
-                var activeStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
-                 
-                //Student is trying to lower their hand
-                if (ticket.ReasonLoweredId == helpedStatus || ticket.ReasonLoweredId == nevermindStatus || ticket.ReasonLoweredId == unhelpedStatus)
-                {
-                    //if the student's hand hasn't been lowered already by the tutor
-                    if(oldticket.StatusId == activeStatus)
-                    {
-                        ticket.StatusId = inactiveStatus;
-                        ticket.TimeLowered = DateTime.Now;
-                    }
-
-                    db.Entry(ticket).State = EntityState.Modified;
-                    db.SaveChanges();
-
-                    //No feedback necessary if they figured out their own question
-                    if(ticket.ReasonLoweredId == nevermindStatus)
-                    {
-                        return RedirectToAction("Home");
-                    }
-
-                    //Feedback desired for satisfied and unsatisfied students
-                    return RedirectToAction("Feedback", "HomeController");
-                }
-                
-                //if the student had their hand lowered by a tutor when they still had a question
-                if (oldticket.StatusId != activeStatus)
-                {
-                    return RedirectToAction("HandLowered", new { id = ticket.Id });
-                }
-                
-                return View(ticket);
-            }
-
-            //if invalid modelstate
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ticket.LocationId);
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
-            return View(ticket);
-        }
-        */
+        
 
         // GET: Tickets/Details/5
         public ActionResult HandLowered(int? id)                        
@@ -313,7 +258,7 @@ namespace RaiseHand.Controllers
             {
                 ticket.ReasonLoweredId = helpedReasonId;
                 ticket.StatusId = inactiveStatus;
-                ticket.TimeLowered = DateTime.Now;
+                ticket.TimeLowered = DateTime.UtcNow;
             }
 
             db.Entry(ticket).State = EntityState.Modified;
@@ -343,7 +288,7 @@ namespace RaiseHand.Controllers
             {
                 ticket.ReasonLoweredId = nevermindReasonId;
                 ticket.StatusId = inactiveStatus;
-                ticket.TimeLowered = DateTime.Now;
+                ticket.TimeLowered = DateTime.UtcNow;
             }
 
             db.Entry(ticket).State = EntityState.Modified;
@@ -373,7 +318,7 @@ namespace RaiseHand.Controllers
             {
                 ticket.ReasonLoweredId = unhelpedReasonId;
                 ticket.StatusId = inactiveStatus;
-                ticket.TimeLowered = DateTime.Now;
+                ticket.TimeLowered = DateTime.UtcNow;
             }
 
             db.Entry(ticket).State = EntityState.Modified;
@@ -470,7 +415,17 @@ namespace RaiseHand.Controllers
             var allTickets = db.Tickets.Include(t => t.Location).Include(t => t.ReasonLowered).Include(t => t.Status).Include(t => t.Subject);
             var activeTickets = allTickets.Where(t => t.StatusId == activeStatus).OrderBy(t => t.TimeRaised).OrderBy(t => t.Number);
 
-            return View(activeTickets.ToList());
+            try
+            {
+                var pacificTimeTickets = GetPacificTime(activeTickets);
+                return View(pacificTimeTickets.ToList());
+            }
+            catch (NullReferenceException e)
+            {
+                //TODO: this should either return an error, or return a more descriptive page than HttpNotFound
+                //It should fail gracefully if the function doesn't work properly.
+                return HttpNotFound();
+            }
         }
 
         //Tutor selected 'Helped' from the TicketManager page
@@ -489,14 +444,14 @@ namespace RaiseHand.Controllers
 
             var tutorHelpedReasonId = db.ReasonsLowered.Where(x => x.Name == "TutorSelectedHelped").First().Id;
             var inactiveStatus = db.Statuses.Where(x => x.Name == "Inactive").First().Id;
-            var activeStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
-            var oldticket = db.Tickets.Find(ticket.Id);
+            //var activeStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
+            //var oldticket = db.Tickets.Find(ticket.Id);
 
-            if (oldticket.StatusId == activeStatus)
+            if (ticket.StatusId != inactiveStatus)
             {
                 ticket.ReasonLoweredId = tutorHelpedReasonId;
                 ticket.StatusId = inactiveStatus;
-                ticket.TimeLowered = DateTime.Now;
+                ticket.TimeLowered = DateTime.UtcNow;
             }
 
             db.Entry(ticket).State = EntityState.Modified;
@@ -520,14 +475,14 @@ namespace RaiseHand.Controllers
 
             var notFoundReasonId = db.ReasonsLowered.Where(x => x.Name == "TutorSelectedNotFound").First().Id;
             var inactiveStatus = db.Statuses.Where(x => x.Name == "Inactive").First().Id;
-            var activeStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
-            var oldticket = db.Tickets.Find(ticket.Id);
+            //var activeStatus = db.Statuses.Where(x => x.Name == "Active").First().Id;
+            //var oldticket = db.Tickets.Find(ticket.Id);
 
-            if (oldticket.StatusId == activeStatus)
+            if (ticket.StatusId != inactiveStatus)
             {
                 ticket.ReasonLoweredId = notFoundReasonId;
                 ticket.StatusId = inactiveStatus;
-                ticket.TimeLowered = DateTime.Now;
+                ticket.TimeLowered = DateTime.UtcNow;
             }
 
             db.Entry(ticket).State = EntityState.Modified;
@@ -535,8 +490,9 @@ namespace RaiseHand.Controllers
             return RedirectToAction("TicketManager", "Tickets");
         }
 
+        //Version 1.0
         //TODO: This method should be replaced with a better method of generating/selecting ticket numbers to issue to students
-        public string GenerateTicketNumber()
+        /*public string GenerateTicketNumber()
         {
             string number;
             number = ticketNumbers[ticketNumberIndex];
@@ -547,6 +503,19 @@ namespace RaiseHand.Controllers
             }
 
             return number;
+        }*/
+
+        //Version 2.0
+        public string GenerateTicketNumber(int id)
+        {
+            string number;
+            int count = db.TicketNumbers.Count();
+
+            int locateId = id % count;
+
+            number = db.TicketNumbers.Find(locateId).Name.ToString();
+
+            return number;
         }
 
         public int CountHandsRaised()
@@ -555,6 +524,23 @@ namespace RaiseHand.Controllers
             int count = db.Tickets.Where(x => x.StatusId == activeStatus).Count();
 
             return count;
+        }
+
+        public IOrderedQueryable<Ticket> GetPacificTime(IOrderedQueryable<Ticket> tickets)
+        {
+            if(tickets == null)
+            {
+                return null;
+            }
+
+            string pacificTimezoneId = "Pacific Standard Time";
+            
+            foreach (var ticket in tickets)
+            {
+                var pacificTime = TimeZoneInfo.ConvertTimeFromUtc(ticket.TimeRaised, TimeZoneInfo.FindSystemTimeZoneById(pacificTimezoneId));
+                ticket.TimeRaised = pacificTime;
+            }
+            return tickets;
         }
     }
 }
