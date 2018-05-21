@@ -9,7 +9,8 @@ namespace RaiseHand.Models
 {
     public class RaisedHandEntities : DbContext
     {
-
+        //AWSConnectionString
+        //RaiseHandConnection
         public RaisedHandEntities()
         : base("name=RaiseHandConnection")
         {

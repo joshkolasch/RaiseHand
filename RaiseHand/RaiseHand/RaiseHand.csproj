@@ -136,8 +136,6 @@
     <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Controllers\TicketNumbersController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
-    <Compile Include="DAL\DbInitializer.cs" />
-    <Compile Include="DAL\RaiseHandContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
