@@ -27,7 +27,7 @@
         </p>
     </div>
 
-    <div style="text-align:center;">
+    @*<div style="text-align:center;">
         <p>Your Ticket Number is:</p>
         <h2 style="color:red;">@Html.DisplayFor(model => model.Number)</h2>
         <p>Location:</p>
@@ -35,7 +35,41 @@
         <p>Number of other hands raised:</p>
         <h3>@ViewBag.HandCount</h3>
     </div>
+        *@
 
+    <div class="container">
+        <svg id="svg8" style="width:80%" version="1.1" viewBox="0 0 303 126" xmlns="http://www.w3.org/2000/svg">
+            <g id="layer1" transform="translate(0,-171)">
+                <g id="g4675" transform="translate(244.17 103.82)" stroke="#000">
+                    <path id="rect3699" transform="scale(.26458)" d="m-768.73 258.08a145.34 69.63 0 0 1-145.27 68.926 145.34 69.63 0 0 1-4.7266-0.11328v29.992l14.762 6.0781-14.762 8.5762v37.346l14.762 6.0781-14.762 8.5762v38.727l15.025 6.1856-15.025 8.7285v38.291l15.127 6.2285-15.127 8.7891v36.98l15.127 6.2285-15.127 8.7891v36.982l15.127 6.2285-15.127 8.7891v22.447a145.34 69.63 0 0 1 2.7266-0.0469 145.34 69.63 0 0 1 145.34 69.629 145.34 69.63 0 0 1-0.0469 0.44532h829.29a145.34 69.63 0 0 1-0.07422-1.0137 145.34 69.63 0 0 1 145.35-69.629 145.34 69.63 0 0 1 14.869 0.37305v-25.219l-15.084-6.2109 15.084-8.7637v-37.025l-15.084-6.2109 15.084-8.7637v-37.025l-15.084-6.2109 15.084-8.7637v-38.232l-15.186-6.252 15.186-8.8223v-38.305l-15.449-6.3613 15.449-8.9766v-36.662l-15.449-6.3613 15.449-8.9766v-27.438a145.34 69.63 0 0 1-12.869 0.3262 145.34 69.63 0 0 1-145.25-68.357z" fill="#fc0" stroke-linejoin="round" stroke-width="6.3275" style="paint-order:normal" />
+                    <rect id="rect3841" x="-210.8" y="80.484" width="233.67" height="98.939" ry="14.362" fill="#fc0" stroke-linejoin="round" stroke-width=".95818" style="paint-order:normal" />
+                    <path id="path3865" d="m-55.09 80.798v98.463" fill="none" />
+                </g>
+            </g>
+            <text x="35" y="40" font-size="15">
+                Your Ticket Number is:
+            </text>
+            <text x="90" y="60" font-size="18" fill="red">
+                @Html.DisplayFor(model => model.Number)
+            </text>
+            <text x="80" y="85" font-size="15">
+                Location:
+            </text>
+            <text x="55" y="105" font-size="15" fill="red">
+                @Html.DisplayFor(model => model.Location.Name)
+            </text>
+
+            <text x="195" y="50" font-size="12">
+                Other Hands
+            </text>
+            <text x="195" y="65" font-size="12">
+                Raised:
+            </text>
+            <text x="215" y="90" font-size="15" fill="red">
+                @ViewBag.HandCount
+            </text>
+        </svg>
+    </div>
     <div class="row">
         <div class="col-md-4">
 
@@ -50,25 +84,26 @@
             {
                 @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
+            <div class="form-horizontal">
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.LocationId)
 
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.SubjectId, "Subject", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("SubjectId", null, "--Select--", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Change Subject" class="btn btn-default" />
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SubjectId, "Subject", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("SubjectId", null, "--Select--", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Change Subject" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
             }
         </div>
 
@@ -77,25 +112,26 @@
             {
                 @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
+            <div class="form-horizontal">
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
 
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.LocationId, "Location", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("LocationId", null, "--Select--", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Change Location" class="btn btn-default" />
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LocationId, "Location", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("LocationId", null, "--Select--", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Change Location" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
             }
         </div>
     </div>

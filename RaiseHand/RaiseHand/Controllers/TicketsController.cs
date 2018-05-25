@@ -332,7 +332,7 @@ namespace RaiseHand.Controllers
         //I would probably have to compare the ViewBag.NewLocationId with the ticket.LocationId before sending it to the server to prevent a senseless transaction
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeLocation([Bind(Include = "LocationId")]Ticket ticket)
+        public ActionResult ChangeLocation([Bind(Include = "Id,LocationId")]Ticket ticket)
         {
             if (ModelState.IsValid)
             {
@@ -341,18 +341,20 @@ namespace RaiseHand.Controllers
                 
                 if (oldticket.LocationId != ticket.LocationId)
                 {
-                    db.Entry(ticket).State = EntityState.Modified;
+                    //Note: there should be a check here to prevent SQL injection
+                    oldticket.LocationId = ticket.LocationId;
+                    db.Entry(oldticket).State = EntityState.Modified;
                     db.SaveChanges();
 
                     //if user's ticket is still active, update their browser
                     if(oldticket.StatusId == activeStatus)
                     {
-                        return RedirectToAction("HandRaised", new { id = ticket.Id });
+                        return RedirectToAction("HandRaised", new { id = oldticket.Id });
                     }
                     //if user's ticket has been taken down for some reason, have them verify the status of their ticket.
                     else
                     {
-                        return RedirectToAction("HandLowered", new { id = ticket.Id });
+                        return RedirectToAction("HandLowered", new { id = oldticket.Id });
                     }
 
                 }
@@ -360,19 +362,17 @@ namespace RaiseHand.Controllers
                 {
                     //TODO: Send a message saying "change your location please"
                     //Note: this should probably already be handled client-side
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
             }
 
-            //Invalid State, return the ticket to the student
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ticket.LocationId);
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
-            return View(ticket);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         //TODO:This currently isn't functioning. I think the TicketId is null :( because the oldticket object is null
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeSubject([Bind(Include = "SubjectId")]Ticket ticket)
+        public ActionResult ChangeSubject([Bind(Include = "Id,LocationId,SubjectId")]Ticket ticket)
         {
             if (ModelState.IsValid)
             {
@@ -381,39 +381,40 @@ namespace RaiseHand.Controllers
 
                 if (oldticket.SubjectId != ticket.SubjectId)
                 {
-                    db.Entry(ticket).State = EntityState.Modified;
+                    //Note: there should be a check here to make sure that the SubjectId is not a SQL injection.
+                    oldticket.SubjectId = ticket.SubjectId;
+                    db.Entry(oldticket).State = EntityState.Modified;
                     db.SaveChanges();
 
                     //if user's ticket is still active, update their browser
                     if (oldticket.StatusId == activeStatus)
                     {
-                        return RedirectToAction("HandRaised", new { id = ticket.Id });
+                        return RedirectToAction("HandRaised", new { id = oldticket.Id });
                     }
                     //if user's ticket has been taken down for some reason, have them verify the status of their ticket.
                     else
                     {
-                        return RedirectToAction("HandLowered", new { id = ticket.Id });
+                        return RedirectToAction("HandLowered", new { id = oldticket.Id });
                     }
 
                 }
                 else
                 {
                     //TODO: Send a message saying "change your location please"
+                    //TODO: Also, there should be a check to see if their status is still 'active'
                     //Note: this should probably already be handled client-side
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
             }
 
-            //Invalid State, return the ticket to the student
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ticket.LocationId);
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
-            return View(ticket);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         public ActionResult TicketManager()
         {
             var activeStatus = db.Statuses.Where(s => s.Name == "Active").First().Id;
             var allTickets = db.Tickets.Include(t => t.Location).Include(t => t.ReasonLowered).Include(t => t.Status).Include(t => t.Subject);
-            var activeTickets = allTickets.Where(t => t.StatusId == activeStatus).OrderBy(t => t.TimeRaised).OrderBy(t => t.Number);
+            var activeTickets = allTickets.Where(t => t.StatusId == activeStatus).OrderBy(t => t.TimeRaised);
 
             try
             {
