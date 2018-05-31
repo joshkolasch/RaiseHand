@@ -21,8 +21,7 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <hr />
+    <div class="form-horizontal" style="border:3px solid black; border-radius:5px; margin:2%; padding:1%; ">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
             <div class="form-group col-md-4">
@@ -43,7 +42,7 @@
 
             <div class="form-group col-md-4">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Raise Your Hand" class="btn btn-primary" />
                 </div>
             </div>
         </div>

@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title RaiseHand</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,12 +26,23 @@
                 </ul>
             </div>
         </div>
+    </div>*@
+    @*<div class="navbar navbar-fixed-top">
+        <div class="container">
+            <div>
+                <img src="~/Content/Images/hands_colorful.png" alt="Colorful Hands Raised" style="background-repeat:repeat-x;"/>
+            </div>
+        </div>
+
+    </div>*@
+    <div style="width:95%; height:200px; background-image:url(../../Content/Images/hands_colorful.png); background-size:contain; background-repeat:repeat-x; margin:0 auto;">
+
     </div>
     <div class="container-fluid body-content" style="margin-left:5%; margin-right:5%;">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>App-prentice Productions</p>
         </footer>
     </div>
 
