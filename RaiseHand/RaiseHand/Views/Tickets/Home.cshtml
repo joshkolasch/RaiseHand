@@ -4,44 +4,44 @@
     ViewBag.Title = "Home";
 }
 
-<h2>Home</h2>
-
 <style>
     .location {
         fill: #d3d3d3;
         transition: .6s fill;
     }
 
-        .location:hover {
-            fill: orange !important;
-        }
+    .location:hover {
+        fill: orange !important;
+    }
 </style>
+
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal" style="border:3px solid black; border-radius:5px; margin:2%; padding:1%; ">
+    <div class="form-horizontal" style="border:3px solid black; border-radius:5px; margin:2%; padding:1%;">
+        <br />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
-            <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.LocationId, "Location", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+            <div class="form-group col-md-5" style="font-size:16px;">
+                @Html.LabelFor(model => model.LocationId, "Location", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
                     @Html.DropDownList("LocationId", null, "--Select--", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.SubjectId, "Subject", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+            <div class="form-group col-md-5" style="font-size:16px;">
+                @Html.LabelFor(model => model.SubjectId, "Subject", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
                     @Html.DropDownList("SubjectId", null, "--Select--", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group col-md-4">
-                <div class="col-md-offset-2 col-md-10">
+            <div class="form-group col-md-2">
+                <div class="col-md-offset-4 col-md-4">
                     <input type="submit" value="Raise Your Hand" class="btn btn-primary" />
                 </div>
             </div>
@@ -51,6 +51,9 @@
 <br/>
 <br/>
 
+<div>
+    <p id="demo-box">Demo Box:</p>
+</div>
 
     <div id="svg-container" class="svg-container" style="width:90%; display:block; margin:0 auto;">
         <?xml version="1.0" encoding="UTF-8" ?>
@@ -65,7 +68,7 @@
             </g>
             <g id="furniture-layer" transform="translate(-491.42 -51.148)">
                 <g id="Computers" fill="none" stroke="#000">
-                    <g id="computer-1" class="computer location" transform="rotate(90 695.67 128.15)" onclick="selectLocation(this.id)">
+                    <g id="computer-1" class="computer location" transform="rotate(90 695.67 128.15)" >
                         <path id="path16426-3-6-8" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-2-8-5" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -75,7 +78,7 @@
                         </g>
                         <path id="path16438-4-9-9" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-2" class="computer location" transform="rotate(-90 666.41 89.536)" onclick="selectLocation(this.id)">
+                    <g id="computer-2" class="computer location" transform="rotate(-90 666.41 89.536)" >
                         <path id="path16426-3-6" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-2-8" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -85,7 +88,7 @@
                         </g>
                         <path id="path16438-4-9" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-3" class="computer location" transform="translate(54.381 .6059)" onclick="selectLocation(this.id)">
+                    <g id="computer-3" class="computer location" transform="translate(54.381 .6059)" >
                         <path id="path16426-8" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-9" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -95,7 +98,7 @@
                         </g>
                         <path id="path16438-02" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-6" class="computer location" transform="translate(15.894 .6059)" onclick="selectLocation(this.id)">
+                    <g id="computer-6" class="computer location" transform="translate(15.894 .6059)" >
                         <path id="path16426-3" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-2" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -105,7 +108,7 @@
                         </g>
                         <path id="path16438-4" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-4" class="computer location" transform="translate(41.552 .6059)" onclick="selectLocation(this.id)">
+                    <g id="computer-4" class="computer location" transform="translate(41.552 .6059)" >
                         <path id="path16426-7" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-1" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -115,7 +118,7 @@
                         </g>
                         <path id="path16438-2" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-5" class="computer location" transform="translate(28.723 .6059)" onclick="selectLocation(this.id)">
+                    <g id="computer-5" class="computer location" transform="translate(28.723 .6059)" >
                         <path id="path16426-32" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-6" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -125,7 +128,7 @@
                         </g>
                         <path id="path16438-0" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-7" class="computer location" transform="rotate(180 688.88 123.78)" onclick="selectLocation(this.id)">
+                    <g id="computer-7" class="computer location" transform="rotate(180 688.88 123.78)" >
                         <path id="path16426-9-14" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-7" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -135,7 +138,7 @@
                         </g>
                         <path id="path16438-9-8" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-8" class="computer location" transform="rotate(180 682.47 123.78)" onclick="selectLocation(this.id)">
+                    <g id="computer-8" class="computer location" transform="rotate(180 682.47 123.78)" >
                         <path id="path16426-9-9" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-5" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -145,7 +148,7 @@
                         </g>
                         <path id="path16438-9-6" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-9" class="computer location" transform="rotate(180 676.05 123.78)" onclick="selectLocation(this.id)">
+                    <g id="computer-9" class="computer location" transform="rotate(180 676.05 123.78)" >
                         <path id="path16426-9-1" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-6" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -155,7 +158,7 @@
                         </g>
                         <path id="path16438-9-4" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-10" class="computer location" transform="rotate(180 669.64 123.78)" onclick="selectLocation(this.id)">
+                    <g id="computer-10" class="computer location" transform="rotate(180 669.64 123.78)" >
                         <path id="path16426-9" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -165,7 +168,7 @@
                         </g>
                         <path id="path16438-9" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-11" class="computer location" transform="translate(54.323 39.89)" onclick="selectLocation(this.id)">
+                    <g id="computer-11" class="computer location" transform="translate(54.323 39.89)" >
                         <path id="path16426-8-8" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-9-2" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -175,7 +178,7 @@
                         </g>
                         <path id="path16438-02-5" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-12" class="computer location" transform="translate(41.494 39.89)" onclick="selectLocation(this.id)">
+                    <g id="computer-12" class="computer location" transform="translate(41.494 39.89)" >
                         <path id="path16426-7-7" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-1-2" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -185,7 +188,7 @@
                         </g>
                         <path id="path16438-2-0" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-13" class="computer location" transform="translate(28.665 39.89)" onclick="selectLocation(this.id)">
+                    <g id="computer-13" class="computer location" transform="translate(28.665 39.89)" >
                         <path id="path16426-32-8" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-6-5" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -195,7 +198,7 @@
                         </g>
                         <path id="path16438-0-3" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-14" class="computer location" transform="translate(15.836 39.89)" onclick="selectLocation(this.id)">
+                    <g id="computer-14" class="computer location" transform="translate(15.836 39.89)" >
                         <path id="path16426-3-8" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-2-1" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -205,7 +208,7 @@
                         </g>
                         <path id="path16438-4-1" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-15" class="computer location" transform="rotate(180 688.85 143.42)" onclick="selectLocation(this.id)">
+                    <g id="computer-15" class="computer location" transform="rotate(180 688.85 143.42)" >
                         <path id="path16426-9-14-6" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-7-0" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -215,7 +218,7 @@
                         </g>
                         <path id="path16438-9-8-0" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-16" class="computer location" transform="rotate(180 682.44 143.42)" onclick="selectLocation(this.id)">
+                    <g id="computer-16" class="computer location" transform="rotate(180 682.44 143.42)" >
                         <path id="path16426-9-9-6" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-5-3" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -225,7 +228,7 @@
                         </g>
                         <path id="path16438-9-6-9" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-17" class="computer location" transform="rotate(180 676.02 143.42)" onclick="selectLocation(this.id)">
+                    <g id="computer-17" class="computer location" transform="rotate(180 676.02 143.42)" >
                         <path id="path16426-9-1-8" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-6-3" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -235,7 +238,7 @@
                         </g>
                         <path id="path16438-9-4-3" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-18" class="computer location" transform="rotate(180 669.61 143.42)" onclick="selectLocation(this.id)">
+                    <g id="computer-18" class="computer location" transform="rotate(180 669.61 143.42)" >
                         <path id="path16426-9-0" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-8" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -245,7 +248,7 @@
                         </g>
                         <path id="path16438-9-0" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-19" class="computer location" transform="translate(53.654 84.257)" onclick="selectLocation(this.id)">
+                    <g id="computer-19" class="computer location" transform="translate(53.654 84.257)" >
                         <path id="path16426-8-7" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-9-1" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -255,7 +258,7 @@
                         </g>
                         <path id="path16438-02-7" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-20" class="computer location" transform="translate(40.825 84.257)" onclick="selectLocation(this.id)">
+                    <g id="computer-20" class="computer location" transform="translate(40.825 84.257)" >
                         <path id="path16426-7-4" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-1-1" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -265,7 +268,7 @@
                         </g>
                         <path id="path16438-2-6" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-21" class="computer location" transform="translate(27.996 84.257)" onclick="selectLocation(this.id)">
+                    <g id="computer-21" class="computer location" transform="translate(27.996 84.257)" >
                         <path id="path16426-32-7" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-6-4" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -275,7 +278,7 @@
                         </g>
                         <path id="path16438-0-0" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-22" class="computer location" transform="translate(15.168 84.257)" onclick="selectLocation(this.id)">
+                    <g id="computer-22" class="computer location" transform="translate(15.168 84.257)" >
                         <path id="path16426-3-85" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-2-6" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -285,7 +288,7 @@
                         </g>
                         <path id="path16438-4-4" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-23" class="computer location" transform="rotate(180 688.52 165.6)" onclick="selectLocation(this.id)">
+                    <g id="computer-23" class="computer location" transform="rotate(180 688.52 165.6)" >
                         <path id="path16426-9-14-3" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-7-1" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -295,7 +298,7 @@
                         </g>
                         <path id="path16438-9-8-6" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-24" class="computer location" transform="rotate(180 682.11 165.6)" onclick="selectLocation(this.id)">
+                    <g id="computer-24" class="computer location" transform="rotate(180 682.11 165.6)" >
                         <path id="path16426-9-9-2" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-5-4" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -305,7 +308,7 @@
                         </g>
                         <path id="path16438-9-6-5" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-25" class="computer location" transform="rotate(180 675.69 165.6)" onclick="selectLocation(this.id)">
+                    <g id="computer-25" class="computer location" transform="rotate(180 675.69 165.6)" >
                         <path id="path16426-9-1-0" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-6-7" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -315,7 +318,7 @@
                         </g>
                         <path id="path16438-9-4-7" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-26" class="computer location" transform="rotate(180 669.28 165.6)" onclick="selectLocation(this.id)">
+                    <g id="computer-26" class="computer location" transform="rotate(180 669.28 165.6)" >
                         <path id="path16426-9-2" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -325,7 +328,7 @@
                         </g>
                         <path id="path16438-9-2" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-27" class="computer location" transform="rotate(180 731.57 186.13)" onclick="selectLocation(this.id)">
+                    <g id="computer-27" class="computer location" transform="rotate(180 731.57 186.13)" >
                         <path id="path16426-9-2-44-3" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-4" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -335,7 +338,7 @@
                         </g>
                         <path id="path16438-9-2-6-69" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-28" class="computer location" transform="rotate(180 724.29 186.14)" onclick="selectLocation(this.id)">
+                    <g id="computer-28" class="computer location" transform="rotate(180 724.29 186.14)" >
                         <path id="path16426-9-2-44-6" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-87" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -345,7 +348,7 @@
                         </g>
                         <path id="path16438-9-2-6-9" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-29" class="computer location" transform="rotate(180 716.98 186.13)" onclick="selectLocation(this.id)">
+                    <g id="computer-29" class="computer location" transform="rotate(180 716.98 186.13)" >
                         <path id="path16426-9-2-44-8" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-8" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -355,7 +358,7 @@
                         </g>
                         <path id="path16438-9-2-6-66" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-30" class="computer location" transform="rotate(180 709.77 186.13)" onclick="selectLocation(this.id)">
+                    <g id="computer-30" class="computer location" transform="rotate(180 709.77 186.13)" >
                         <path id="path16426-9-2-44-1" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-6" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -365,7 +368,7 @@
                         </g>
                         <path id="path16438-9-2-6-6" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-31" class="computer location" transform="rotate(180 702.56 186.13)" onclick="selectLocation(this.id)">
+                    <g id="computer-31" class="computer location" transform="rotate(180 702.56 186.13)" >
                         <path id="path16426-9-2-44-9" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-7" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -375,7 +378,7 @@
                         </g>
                         <path id="path16438-9-2-6-8" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-32" class="computer location" transform="rotate(180 678.41 185.97)" onclick="selectLocation(this.id)">
+                    <g id="computer-32" class="computer location" transform="rotate(180 678.41 185.97)" >
                         <path id="path16426-9-2-44" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -385,7 +388,7 @@
                         </g>
                         <path id="path16438-9-2-6" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-33" class="computer location" transform="rotate(180 669.52 185.93)" onclick="selectLocation(this.id)">
+                    <g id="computer-33" class="computer location" transform="rotate(180 669.52 185.93)" >
                         <path id="path16426-9-2-2" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-2" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -395,7 +398,7 @@
                         </g>
                         <path id="path16438-9-2-2" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-34" class="computer location" transform="rotate(180 660.74 186.07)" onclick="selectLocation(this.id)">
+                    <g id="computer-34" class="computer location" transform="rotate(180 660.74 186.07)" >
                         <path id="path16426-9-2-0" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-43" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -405,7 +408,7 @@
                         </g>
                         <path id="path16438-9-2-7" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-35" class="computer location" transform="rotate(180 651.95 185.97)" onclick="selectLocation(this.id)">
+                    <g id="computer-35" class="computer location" transform="rotate(180 651.95 185.97)" >
                         <path id="path16426-9-2-8" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-49" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -415,7 +418,7 @@
                         </g>
                         <path id="path16438-9-2-97" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-36" class="computer location" transform="rotate(180 642.79 186.07)" onclick="selectLocation(this.id)">
+                    <g id="computer-36" class="computer location" transform="rotate(180 642.79 186.07)" >
                         <path id="path16426-9-2-9" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-4" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -425,7 +428,7 @@
                         </g>
                         <path id="path16438-9-2-9" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-37" class="computer location" transform="rotate(180 634.09 185.99)" onclick="selectLocation(this.id)">
+                    <g id="computer-37" class="computer location" transform="rotate(180 634.09 185.99)" >
                         <path id="path16426-9-2-4" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-7" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -435,7 +438,7 @@
                         </g>
                         <path id="path16438-9-2-1" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-38" class="computer location" transform="translate(35.981 207.9)" onclick="selectLocation(this.id)">
+                    <g id="computer-38" class="computer location" transform="translate(35.981 207.9)" >
                         <path id="path16426-9-2-44-348-4" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-70-7" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -445,7 +448,7 @@
                         </g>
                         <path id="path16438-9-2-6-1-7" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-39" class="computer location" transform="translate(23.152 207.9)" onclick="selectLocation(this.id)">
+                    <g id="computer-39" class="computer location" transform="translate(23.152 207.9)" >
                         <path id="path16426-9-2-44-348" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-70" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -455,7 +458,7 @@
                         </g>
                         <path id="path16438-9-2-6-1" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-40" class="computer location" transform="rotate(180 679.72 227.43)" onclick="selectLocation(this.id)">
+                    <g id="computer-40" class="computer location" transform="rotate(180 679.72 227.43)" >
                         <path id="path16426-9-2-44-80" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-5" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -465,7 +468,7 @@
                         </g>
                         <path id="path16438-9-2-6-81" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-41" class="computer location" transform="rotate(180 673.3 227.43)" onclick="selectLocation(this.id)">
+                    <g id="computer-41" class="computer location" transform="rotate(180 673.3 227.43)" >
                         <path id="path16426-9-2-44-34" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-6-76" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -475,7 +478,7 @@
                         </g>
                         <path id="path16438-9-2-6-3" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-42" class="computer location" transform="translate(-27.257 266.56)" onclick="selectLocation(this.id)">
+                    <g id="computer-42" class="computer location" transform="translate(-27.257 266.56)" >
                         <path id="path16426-9-2-4-2-5" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-7-6-3" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -485,7 +488,7 @@
                         </g>
                         <path id="path16438-9-2-1-7-2" d="m658.14 120.54v0.75596h7.2569v-0.77958z" stroke-width=".26087px" />
                     </g>
-                    <g id="computer-43" class="computer location" transform="translate(-40.086 266.56)" onclick="selectLocation(this.id)">
+                    <g id="computer-43" class="computer location" transform="translate(-40.086 266.56)" >
                         <path id="path16426-9-2-4-2" d="m655.34 114.45h12.829v9.0203h-12.896z" stroke-width=".26458px" />
                         <path id="path16428-10-2-7-6" d="m659.02 114.36v-3.6437h5.406v3.6352z" stroke-width=".27079px" />
                         <g stroke-width=".26458px">
@@ -517,44 +520,44 @@
                     </g>
                 </g>
                 <g id="WhiteboardTables" stroke="#000" stroke-linejoin="round">
-                    <g id="whiteboard-table-1" class="whiteboard-table location" transform="rotate(90 891.42 205.95)" onclick="selectLocation(this.id)">
+                    <g id="whiteboard-table-1" class="whiteboard-table location" transform="rotate(90 891.42 205.95)" >
                         <rect id="rect7458-8-1-3-0-6" transform="rotate(90)" x="241.08" y="-780.2" width="5.0301" height="26.386" stroke-width=".30262" style="paint-order:normal" />
                         <path id="path7038-9-0-1-0-4-3-6-0" d="m776.96 239.02c-1e-5 -1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                         <path id="path7038-9-42-2-8-9-9-9-49" d="m765.04 239.02c0-1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                     </g>
-                    <g id="whiteboard-table-2" class="whiteboard-table location" transform="rotate(-90 726.84 121.71)" onclick="selectLocation(this.id)">
+                    <g id="whiteboard-table-2" class="whiteboard-table location" transform="rotate(-90 726.84 121.71)" >
                         <rect id="rect7458-8-1-3-0-8" transform="rotate(90)" x="241.08" y="-780.2" width="5.0301" height="26.386" stroke-width=".30262" style="paint-order:normal" />
                         <path id="path7038-9-0-1-0-4-3-6-75" d="m776.96 239.02c-1e-5 -1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                         <path id="path7038-9-42-2-8-9-9-9-2" d="m765.04 239.02c0-1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                     </g>
-                    <g id="whiteboard-table-3" class="whiteboard-table location" transform="rotate(180 730.86 157.47)" onclick="selectLocation(this.id)">
+                    <g id="whiteboard-table-3" class="whiteboard-table location" transform="rotate(180 730.86 157.47)" >
                         <rect id="rect7458-8-1-3-04" transform="rotate(90)" x="241.08" y="-780.2" width="5.0301" height="26.386" stroke-width=".30262" style="paint-order:normal" />
                         <path id="path7038-9-0-1-0-4-3-9" d="m776.96 239.02c-1e-5 -1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                         <path id="path7038-9-42-2-8-9-9-3" d="m765.04 239.02c0-1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                     </g>
-                    <g id="whiteboard-table-4" class="whiteboard-table location" transform="rotate(-90 794.48 174)" onclick="selectLocation(this.id)">
+                    <g id="whiteboard-table-4" class="whiteboard-table location" transform="rotate(-90 794.48 174)" >
                         <rect id="rect7458-8-1-3-0-0" transform="rotate(90)" x="241.08" y="-780.2" width="5.0301" height="26.386" stroke-width=".30262" style="paint-order:normal" />
                         <path id="path7038-9-0-1-0-4-3-6-2" d="m776.96 239.02c-1e-5 -1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                         <path id="path7038-9-42-2-8-9-9-9-0" d="m765.04 239.02c0-1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                     </g>
-                    <g id="whiteboard-table-5" class="whiteboard-table location" transform="translate(84.667 -.094503)" onclick="selectLocation(this.id)">
+                    <g id="whiteboard-table-5" class="whiteboard-table location" transform="translate(84.667 -.094503)" >
                         <rect id="rect7458-8-1-3-0-7" transform="rotate(90)" x="241.08" y="-780.2" width="5.0301" height="26.386" stroke-width=".30262" style="paint-order:normal" />
                         <path id="path7038-9-0-1-0-4-3-6-7" d="m776.96 239.02c-1e-5 -1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                         <path id="path7038-9-42-2-8-9-9-9-4" d="m765.04 239.02c0-1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                     </g>
-                    <g id="whiteboard-table-6" class="whiteboard-table location" transform="translate(23.028 .032246)" onclick="selectLocation(this.id)">
+                    <g id="whiteboard-table-6" class="whiteboard-table location" transform="translate(23.028 .032246)" >
                         <rect id="rect7458-8-1-3-0" transform="rotate(90)" x="241.08" y="-780.2" width="5.0301" height="26.386" stroke-width=".30262" style="paint-order:normal" />
                         <path id="path7038-9-0-1-0-4-3-6" d="m776.96 239.02c-1e-5 -1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                         <path id="path7038-9-42-2-8-9-9-9" d="m765.04 239.02c0-1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                     </g>
-                    <g id="whiteboard-table-7" class="whiteboard-table location" transform="translate(-3.3582 .032246)" onclick="selectLocation(this.id)">
+                    <g id="whiteboard-table-7" class="whiteboard-table location" transform="translate(-3.3582 .032246)" >
                         <rect id="rect7458-8-1-3" transform="rotate(90)" x="241.08" y="-780.2" width="5.0301" height="26.386" stroke-width=".30262" style="paint-order:normal" />
                         <path id="path7038-9-0-1-0-4-3" d="m776.96 239.02c-1e-5 -1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                         <path id="path7038-9-42-2-8-9-9" d="m765.04 239.02c0-1.7022-1.6386-2.0023-3.6599-2.0023-2.0213 0-3.6599 0.39004-3.6599 2.0923 6.1e-4 0.0515 3e-3 1.0929 7e-3 1.1444 0.62376-0.77567 2.0616-1.2791 3.6534-1.2792 1.5915 2e-3 3.0282 0.50511 3.6506 1.281 5e-3 -0.052 0.0208-0.93652 0.0224-0.98868z" stroke-width=".44135" style="paint-order:normal" />
                     </g>
                 </g>
                 <g id="TrapezoidTables" stroke="#000">
-                    <g id="trapezoid-table-1" class="trapezoid-table location" transform="translate(113.04 7.2487)" onclick="selectLocation(this.id)">
+                    <g id="trapezoid-table-1" class="trapezoid-table location" transform="translate(113.04 7.2487)" >
                         <path id="path8441-6-8" d="m674.31 277.3h11.78l4.0651 7.0387h-20.332z" stroke-width=".37151px" />
                         <path id="path8441-1-9-6-03" d="m685.67 291.38h-11.78l-4.0651-7.0387h20.332z" stroke-width=".37151px" />
                         <g stroke-linejoin="round" stroke-width=".33934">
@@ -564,7 +567,7 @@
                             <path id="path7038-9-3-7-4-54" d="m683.14 275.78c0-1.3088-1.2599-1.5395-2.8141-1.5395-1.5541 0-2.814 0.2999-2.814 1.6087 4.5e-4 0.0396 2e-3 0.84033 5e-3 0.8799 0.4796-0.5964 1.5852-0.98355 2.809-0.98356 1.2237 2e-3 2.3284 0.38836 2.8069 0.9849 4e-3 -0.04 0.016-0.72007 0.0172-0.76018z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="trapezoid-table-2" class="trapezoid-table location" transform="translate(85.292 7.8106)" onclick="selectLocation(this.id)">
+                    <g id="trapezoid-table-2" class="trapezoid-table location" transform="translate(85.292 7.8106)" >
                         <path id="path8441-6-6" d="m674.31 277.3h11.78l4.0651 7.0387h-20.332z" stroke-width=".37151px" />
                         <path id="path8441-1-9-6-0" d="m685.67 291.38h-11.78l-4.0651-7.0387h20.332z" stroke-width=".37151px" />
                         <g stroke-linejoin="round" stroke-width=".33934">
@@ -574,7 +577,7 @@
                             <path id="path7038-9-3-7-4-5" d="m683.14 275.78c0-1.3088-1.2599-1.5395-2.8141-1.5395-1.5541 0-2.814 0.2999-2.814 1.6087 4.5e-4 0.0396 2e-3 0.84033 5e-3 0.8799 0.4796-0.5964 1.5852-0.98355 2.809-0.98356 1.2237 2e-3 2.3284 0.38836 2.8069 0.9849 4e-3 -0.04 0.016-0.72007 0.0172-0.76018z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="trapezoid-table-3" class="trapezoid-table location" onclick="selectLocation(this.id)">
+                    <g id="trapezoid-table-3" class="trapezoid-table location" >
                         <path id="path8441-6" d="m674.31 277.3h11.78l4.0651 7.0387h-20.332z" stroke-width=".37151px" />
                         <path id="path8441-1-9-6" d="m685.67 291.38h-11.78l-4.0651-7.0387h20.332z" stroke-width=".37151px" />
                         <g stroke-linejoin="round" stroke-width=".33934">
@@ -584,7 +587,7 @@
                             <path id="path7038-9-3-7-4" d="m683.14 275.78c0-1.3088-1.2599-1.5395-2.8141-1.5395-1.5541 0-2.814 0.2999-2.814 1.6087 4.5e-4 0.0396 2e-3 0.84033 5e-3 0.8799 0.4796-0.5964 1.5852-0.98355 2.809-0.98356 1.2237 2e-3 2.3284 0.38836 2.8069 0.9849 4e-3 -0.04 0.016-0.72007 0.0172-0.76018z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="trapezoid-table-4" class="trapezoid-table location" transform="translate(1.6036 4.1427)" onclick="selectLocation(this.id)">
+                    <g id="trapezoid-table-4" class="trapezoid-table location" transform="translate(1.6036 4.1427)" >
                         <g id="g8491" transform="matrix(1.5232 0 0 1.6176 -347.2 -176.82)" stroke-width=".23668px">
                             <path id="path8441" d="m624.2 279.07h7.7339l2.6687 4.3513h-13.348z" />
                             <path id="path8441-0" d="m642.34 283.42h-7.7339l-2.6687-4.3513h13.348z" />
@@ -604,7 +607,7 @@
                             <path id="path7038-9-3-7-1-7-5" d="m638.79 290.44c0 1.3088 1.2599 1.5395 2.8141 1.5395 1.5541 0 2.814-0.2999 2.814-1.6087-4.5e-4 -0.0396-2e-3 -0.84033-5e-3 -0.8799-0.4796 0.5964-1.5852 0.98355-2.809 0.98356-1.2237-2e-3 -2.3284-0.38836-2.8069-0.9849-4e-3 0.04-0.016 0.72007-0.0172 0.76018z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="trapezoid-table-5" class="trapezoid-table location" transform="translate(2.5436 41.256)" onclick="selectLocation(this.id)">
+                    <g id="trapezoid-table-5" class="trapezoid-table location" transform="translate(2.5436 41.256)" >
                         <g id="g8491-1" transform="matrix(1.5232 0 0 1.6176 -347.2 -176.82)" stroke-width=".23668px">
                             <path id="path8441-8" d="m624.2 279.07h7.7339l2.6687 4.3513h-13.348z" />
                             <path id="path8441-0-98" d="m642.34 283.42h-7.7339l-2.6687-4.3513h13.348z" />
@@ -624,7 +627,7 @@
                             <path id="path7038-9-3-7-1-7-5-3" d="m638.79 290.44c0 1.3088 1.2599 1.5395 2.8141 1.5395 1.5541 0 2.814-0.2999 2.814-1.6087-4.5e-4 -0.0396-2e-3 -0.84033-5e-3 -0.8799-0.4796 0.5964-1.5852 0.98355-2.809 0.98356-1.2237-2e-3 -2.3284-0.38836-2.8069-0.9849-4e-3 0.04-0.016 0.72007-0.0172 0.76018z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="trapezoid-table-6" class="trapezoid-table location" transform="translate(2.1427 75.092)" onclick="selectLocation(this.id)">
+                    <g id="trapezoid-table-6" class="trapezoid-table location" transform="translate(2.1427 75.092)" >
                         <g id="g8491-7" transform="matrix(1.5232 0 0 1.6176 -347.2 -176.82)" stroke-width=".23668px">
                             <path id="path8441-7" d="m624.2 279.07h7.7339l2.6687 4.3513h-13.348z" />
                             <path id="path8441-0-5" d="m642.34 283.42h-7.7339l-2.6687-4.3513h13.348z" />
@@ -644,7 +647,7 @@
                             <path id="path7038-9-3-7-1-7-5-7" d="m638.79 290.44c0 1.3088 1.2599 1.5395 2.8141 1.5395 1.5541 0 2.814-0.2999 2.814-1.6087-4.5e-4 -0.0396-2e-3 -0.84033-5e-3 -0.8799-0.4796 0.5964-1.5852 0.98355-2.809 0.98356-1.2237-2e-3 -2.3284-0.38836-2.8069-0.9849-4e-3 0.04-0.016 0.72007-0.0172 0.76018z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="trapezoid-table-7" class="trapezoid-table location" transform="translate(78.311 93.289)" onclick="selectLocation(this.id)">
+                    <g id="trapezoid-table-7" class="trapezoid-table location" transform="translate(78.311 93.289)" >
                         <g id="g8491-7-1" transform="matrix(1.5232 0 0 1.6176 -347.2 -176.82)" stroke-width=".23668px">
                             <path id="path8441-7-1" d="m624.2 279.07h7.7339l2.6687 4.3513h-13.348z" />
                             <path id="path8441-0-5-9" d="m642.34 283.42h-7.7339l-2.6687-4.3513h13.348z" />
@@ -768,7 +771,7 @@
                     </g>
                 </g>
                 <g id="StudyRoomTables" stroke="#000">
-                    <g id="study-room-table-1" class="study-room-table location" onclick="selectLocation(this.id)">
+                    <g id="study-room-table-1" class="study-room-table location" >
                         <rect id="rect6043" x="880.91" y="80.819" width="22.145" height="23.044" ry="0" stroke-width="1.2533" style="paint-order:fill markers stroke" />
                         <path id="path6060" d="m892.01 80.979v22.718" stroke-width=".4" />
                         <g stroke-linejoin="round">
@@ -778,7 +781,7 @@
                             <path id="path7038-6-1" d="m905.86 100.66c1.7022-1e-5 2.0023-1.6386 2.0023-3.6599 0-2.0213-0.39004-3.6599-2.0923-3.6599-0.0515 6.1e-4 -1.0929 3e-3 -1.1444 7e-3 0.77567 0.62376 1.2791 2.0617 1.2792 3.6534-2e-3 1.5915-0.50511 3.0282-1.281 3.6506 0.052 5e-3 0.93652 0.0208 0.98868 0.0224z" stroke-width=".44135" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="study-room-table-2" class="study-room-table location" transform="translate(-.3675 49.642)" onclick="selectLocation(this.id)">
+                    <g id="study-room-table-2" class="study-room-table location" transform="translate(-.3675 49.642)" >
                         <rect id="rect6043-0" x="880.91" y="80.819" width="22.145" height="23.044" ry="0" stroke-width="1.2533" style="paint-order:fill markers stroke" />
                         <path id="path6060-8" d="m892.01 80.979v22.718" stroke-width=".4" />
                         <g stroke-linejoin="round">
@@ -788,7 +791,7 @@
                             <path id="path7038-6-1-5" d="m905.86 100.66c1.7022-1e-5 2.0023-1.6386 2.0023-3.6599 0-2.0213-0.39004-3.6599-2.0923-3.6599-0.0515 6.1e-4 -1.0929 3e-3 -1.1444 7e-3 0.77567 0.62376 1.2791 2.0617 1.2792 3.6534-2e-3 1.5915-0.50511 3.0282-1.281 3.6506 0.052 5e-3 0.93652 0.0208 0.98868 0.0224z" stroke-width=".44135" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="study-room-table-3" class="study-room-table location" transform="translate(-.50113 97.35)" onclick="selectLocation(this.id)">
+                    <g id="study-room-table-3" class="study-room-table location" transform="translate(-.50113 97.35)" >
                         <rect id="rect6043-9" x="880.91" y="80.819" width="22.145" height="23.044" ry="0" stroke-width="1.2533" style="paint-order:fill markers stroke" />
                         <path id="path6060-7" d="m892.01 80.979v22.718" stroke-width=".4" />
                         <g stroke-linejoin="round">
@@ -800,7 +803,7 @@
                     </g>
                 </g>
                 <g id="RoundTables">
-                    <g id="round-table-1" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 433.53 -539.37)" fill="#fff" stroke="#000" stroke-linejoin="round" onclick="selectLocation(this.id)">
+                    <g id="round-table-1" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 433.53 -539.37)" fill="#fff" stroke="#000" stroke-linejoin="round" >
                         <circle id="path7168-99-93" cx="761.81" cy="205.34" r="11.528" stroke-width=".608" style="paint-order:normal" />
                         <path id="path7038-9-4-9-42" d="m747.39 201.68c-1.7022 0-2.0023 1.6386-2.0023 3.6599 0 2.0213 0.39004 3.6599 2.0923 3.6599 0.0515-6.1e-4 1.0929-3e-3 1.1444-7e-3 -0.77567-0.62376-1.2791-2.0616-1.2792-3.6534 2e-3 -1.5915 0.50511-3.0282 1.281-3.6506-0.052-5e-3 -0.93652-0.0208-0.98868-0.0224z" stroke-width=".44135" style="paint-order:normal" />
                         <g stroke-width=".44135">
@@ -809,7 +812,7 @@
                             <path id="path7038-9-4-3-28-32" d="m758.35 218.98c0 1.7022 1.6386 2.0023 3.6599 2.0023 2.0213 0 3.6599-0.39004 3.6599-2.0923-6.1e-4 -0.0515-3e-3 -1.0929-7e-3 -1.1444-0.62376 0.77567-2.0616 1.2791-3.6534 1.2792-1.5915-2e-3 -3.0282-0.50511-3.6506-1.281-5e-3 0.052-0.0208 0.93652-0.0224 0.98868z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="round-table-2" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 395.01 -538.83)" fill="#fff" stroke="#000" stroke-linejoin="round" onclick="selectLocation(this.id)">
+                    <g id="round-table-2" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 395.01 -538.83)" fill="#fff" stroke="#000" stroke-linejoin="round" >
                         <circle id="path7168-99-4" cx="761.81" cy="205.34" r="11.528" stroke-width=".608" style="paint-order:normal" />
                         <path id="path7038-9-4-9-4" d="m747.39 201.68c-1.7022 0-2.0023 1.6386-2.0023 3.6599 0 2.0213 0.39004 3.6599 2.0923 3.6599 0.0515-6.1e-4 1.0929-3e-3 1.1444-7e-3 -0.77567-0.62376-1.2791-2.0616-1.2792-3.6534 2e-3 -1.5915 0.50511-3.0282 1.281-3.6506-0.052-5e-3 -0.93652-0.0208-0.98868-0.0224z" stroke-width=".44135" style="paint-order:normal" />
                         <g stroke-width=".44135">
@@ -818,7 +821,7 @@
                             <path id="path7038-9-4-3-28-3" d="m758.35 218.98c0 1.7022 1.6386 2.0023 3.6599 2.0023 2.0213 0 3.6599-0.39004 3.6599-2.0923-6.1e-4 -0.0515-3e-3 -1.0929-7e-3 -1.1444-0.62376 0.77567-2.0616 1.2791-3.6534 1.2792-1.5915-2e-3 -3.0282-0.50511-3.6506-1.281-5e-3 0.052-0.0208 0.93652-0.0224 0.98868z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="round-table-3" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 457.15 -491.87)" fill="#fff" stroke="#000" stroke-linejoin="round" onclick="selectLocation(this.id)">
+                    <g id="round-table-3" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 457.15 -491.87)" fill="#fff" stroke="#000" stroke-linejoin="round" >
                         <circle id="path7168-99-9" cx="761.81" cy="205.34" r="11.528" stroke-width=".608" style="paint-order:normal" />
                         <path id="path7038-9-4-9-6" d="m747.39 201.68c-1.7022 0-2.0023 1.6386-2.0023 3.6599 0 2.0213 0.39004 3.6599 2.0923 3.6599 0.0515-6.1e-4 1.0929-3e-3 1.1444-7e-3 -0.77567-0.62376-1.2791-2.0616-1.2792-3.6534 2e-3 -1.5915 0.50511-3.0282 1.281-3.6506-0.052-5e-3 -0.93652-0.0208-0.98868-0.0224z" stroke-width=".44135" style="paint-order:normal" />
                         <g stroke-width=".44135">
@@ -827,7 +830,7 @@
                             <path id="path7038-9-4-3-28-0" d="m758.35 218.98c0 1.7022 1.6386 2.0023 3.6599 2.0023 2.0213 0 3.6599-0.39004 3.6599-2.0923-6.1e-4 -0.0515-3e-3 -1.0929-7e-3 -1.1444-0.62376 0.77567-2.0616 1.2791-3.6534 1.2792-1.5915-2e-3 -3.0282-0.50511-3.6506-1.281-5e-3 0.052-0.0208 0.93652-0.0224 0.98868z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="round-table-4" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 420.59 -492.05)" onclick="selectLocation(this.id)">
+                    <g id="round-table-4" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 420.59 -492.05)" >
                         <g id="g7415" stroke="#000" stroke-linejoin="round">
                             <circle id="path7168-99-0" cx="761.81" cy="205.34" r="11.528" stroke-width=".608" style="paint-order:normal" />
                             <path id="path7038-9-4-9-5" d="m747.39 201.68c-1.7022 0-2.0023 1.6386-2.0023 3.6599 0 2.0213 0.39004 3.6599 2.0923 3.6599 0.0515-6.1e-4 1.0929-3e-3 1.1444-7e-3 -0.77567-0.62376-1.2791-2.0616-1.2792-3.6534 2e-3 -1.5915 0.50511-3.0282 1.281-3.6506-0.052-5e-3 -0.93652-0.0208-0.98868-0.0224z" stroke-width=".44135" style="paint-order:normal" />
@@ -838,7 +841,7 @@
                             </g>
                         </g>
                     </g>
-                    <g id="round-table-5" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 382.3 -492.28)" fill="#fff" stroke="#000" stroke-linejoin="round" onclick="selectLocation(this.id)">
+                    <g id="round-table-5" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 382.3 -492.28)" fill="#fff" stroke="#000" stroke-linejoin="round" >
                         <circle id="path7168-99" cx="761.81" cy="205.34" r="11.528" stroke-width=".608" style="paint-order:normal" />
                         <path id="path7038-9-4-9" d="m747.39 201.68c-1.7022 0-2.0023 1.6386-2.0023 3.6599 0 2.0213 0.39004 3.6599 2.0923 3.6599 0.0515-6.1e-4 1.0929-3e-3 1.1444-7e-3 -0.77567-0.62376-1.2791-2.0616-1.2792-3.6534 2e-3 -1.5915 0.50511-3.0282 1.281-3.6506-0.052-5e-3 -0.93652-0.0208-0.98868-0.0224z" stroke-width=".44135" style="paint-order:normal" />
                         <g stroke-width=".44135">
@@ -847,7 +850,7 @@
                             <path id="path7038-9-4-3-28" d="m758.35 218.98c0 1.7022 1.6386 2.0023 3.6599 2.0023 2.0213 0 3.6599-0.39004 3.6599-2.0923-6.1e-4 -0.0515-3e-3 -1.0929-7e-3 -1.1444-0.62376 0.77567-2.0616 1.2791-3.6534 1.2792-1.5915-2e-3 -3.0282-0.50511-3.6506-1.281-5e-3 0.052-0.0208 0.93652-0.0224 0.98868z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="round-table-6" class="round-table location" transform="matrix(.93918 0 0 .93918 40.333 8.8698)" onclick="selectLocation(this.id)">
+                    <g id="round-table-6" class="round-table location" transform="matrix(.93918 0 0 .93918 40.333 8.8698)" >
                         <g id="g7300-3" transform="rotate(45 796.1 300.76)" stroke="#000" stroke-linejoin="round">
                             <circle id="path7168-5" cx="761.81" cy="205.34" r="11.528" stroke-width=".608" style="paint-order:normal" />
                             <path id="path7038-9-4-02" d="m747.39 201.68c-1.7022 0-2.0023 1.6386-2.0023 3.6599 0 2.0213 0.39004 3.6599 2.0923 3.6599 0.0515-6.1e-4 1.0929-3e-3 1.1444-7e-3 -0.77567-0.62376-1.2791-2.0616-1.2792-3.6534 2e-3 -1.5915 0.50511-3.0282 1.281-3.6506-0.052-5e-3 -0.93652-0.0208-0.98868-0.0224z" stroke-width=".44135" style="paint-order:normal" />
@@ -858,7 +861,7 @@
                             </g>
                         </g>
                     </g>
-                    <g id="round-table-7" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 423.42 -436.88)" fill="#fff" stroke="#000" stroke-linejoin="round" onclick="selectLocation(this.id)">
+                    <g id="round-table-7" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 423.42 -436.88)" fill="#fff" stroke="#000" stroke-linejoin="round" >
                         <circle id="path7168-9" cx="761.81" cy="205.34" r="11.528" stroke-width=".608" style="paint-order:normal" />
                         <path id="path7038-9-4-5" d="m747.39 201.68c-1.7022 0-2.0023 1.6386-2.0023 3.6599 0 2.0213 0.39004 3.6599 2.0923 3.6599 0.0515-6.1e-4 1.0929-3e-3 1.1444-7e-3 -0.77567-0.62376-1.2791-2.0616-1.2792-3.6534 2e-3 -1.5915 0.50511-3.0282 1.281-3.6506-0.052-5e-3 -0.93652-0.0208-0.98868-0.0224z" stroke-width=".44135" style="paint-order:normal" />
                         <g stroke-width=".44135">
@@ -867,7 +870,7 @@
                             <path id="path7038-9-4-3-2" d="m758.35 218.98c0 1.7022 1.6386 2.0023 3.6599 2.0023 2.0213 0 3.6599-0.39004 3.6599-2.0923-6.1e-4 -0.0515-3e-3 -1.0929-7e-3 -1.1444-0.62376 0.77567-2.0616 1.2791-3.6534 1.2792-1.5915-2e-3 -3.0282-0.50511-3.6506-1.281-5e-3 0.052-0.0208 0.93652-0.0224 0.98868z" style="paint-order:normal" />
                         </g>
                     </g>
-                    <g id="round-table-8" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 390.72 -437.23)" fill="#fff" stroke="#000" stroke-linejoin="round" onclick="selectLocation(this.id)">
+                    <g id="round-table-8" class="round-table location" transform="matrix(.6641 .6641 -.6641 .6641 390.72 -437.23)" fill="#fff" stroke="#000" stroke-linejoin="round" >
                         <circle id="path7168" cx="761.81" cy="205.34" r="11.528" stroke-width=".608" style="paint-order:normal" />
                         <path id="path7038-9-4" d="m747.39 201.68c-1.7022 0-2.0023 1.6386-2.0023 3.6599 0 2.0213 0.39004 3.6599 2.0923 3.6599 0.0515-6.1e-4 1.0929-3e-3 1.1444-7e-3 -0.77567-0.62376-1.2791-2.0616-1.2792-3.6534 2e-3 -1.5915 0.50511-3.0282 1.281-3.6506-0.052-5e-3 -0.93652-0.0208-0.98868-0.0224z" stroke-width=".44135" style="paint-order:normal" />
                         <g stroke-width=".44135">
@@ -946,49 +949,49 @@
                     </g>
                 </g>
                 <g id="Couches" fill="#fff" stroke="#000" stroke-linejoin="round">
-                    <g id="couch-1" class="couch location" transform="matrix(0 1.175 -1.175 0 881.56 -818.43)" onclick="selectLocation(this.id)">
+                    <g id="couch-1" class="couch location" transform="matrix(0 1.175 -1.175 0 881.56 -818.43)" >
                         <rect id="rect8073-3-7" x="755.4" y="42.302" width="7.6791" height="10.514" ry="2.0745" stroke-width=".63013" style="paint-order:normal" />
                         <rect id="rect8075-2-15" x="755.41" y="42.314" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-4-5-3" x="755.39" y="50.038" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-7-5-2" transform="rotate(90)" x="42.291" y="-758.01" width="10.536" height="2.6199" ry="1.31" stroke-width=".68366" style="paint-order:normal" />
                     </g>
-                    <g id="couch-2" class="couch location" transform="matrix(0 1.175 -1.175 0 869.18 -818.43)" onclick="selectLocation(this.id)">
+                    <g id="couch-2" class="couch location" transform="matrix(0 1.175 -1.175 0 869.18 -818.43)" >
                         <rect id="rect8073-3-4" x="755.4" y="42.302" width="7.6791" height="10.514" ry="2.0745" stroke-width=".63013" style="paint-order:normal" />
                         <rect id="rect8075-2-6" x="755.41" y="42.314" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-4-5-27" x="755.39" y="50.038" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-7-5-12" transform="rotate(90)" x="42.291" y="-758.01" width="10.536" height="2.6199" ry="1.31" stroke-width=".68366" style="paint-order:normal" />
                     </g>
-                    <g id="couch-3" class="couch location" transform="matrix(0 1.175 -1.175 0 849.8 -818.47)" onclick="selectLocation(this.id)">
+                    <g id="couch-3" class="couch location" transform="matrix(0 1.175 -1.175 0 849.8 -818.47)" >
                         <rect id="rect8073-3-88" x="755.4" y="42.302" width="7.6791" height="10.514" ry="2.0745" stroke-width=".63013" style="paint-order:normal" />
                         <rect id="rect8075-2-5" x="755.41" y="42.314" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-4-5-6" x="755.39" y="50.038" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-7-5-5" transform="rotate(90)" x="42.291" y="-758.01" width="10.536" height="2.6199" ry="1.31" stroke-width=".68366" style="paint-order:normal" />
                     </g>
-                    <g id="couch-4" class="couch location" transform="matrix(0 1.175 -1.175 0 837.42 -818.47)" onclick="selectLocation(this.id)">
+                    <g id="couch-4" class="couch location" transform="matrix(0 1.175 -1.175 0 837.42 -818.47)" >
                         <rect id="rect8073-3-1" x="755.4" y="42.302" width="7.6791" height="10.514" ry="2.0745" stroke-width=".63013" style="paint-order:normal" />
                         <rect id="rect8075-2-0" x="755.41" y="42.314" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-4-5-9" x="755.39" y="50.038" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-7-5-3" transform="rotate(90)" x="42.291" y="-758.01" width="10.536" height="2.6199" ry="1.31" stroke-width=".68366" style="paint-order:normal" />
                     </g>
-                    <g id="couch-5" class="couch location" transform="matrix(0 1.175 -1.175 0 818.21 -818.45)" onclick="selectLocation(this.id)">
+                    <g id="couch-5" class="couch location" transform="matrix(0 1.175 -1.175 0 818.21 -818.45)" >
                         <rect id="rect8073-3-8" x="755.4" y="42.302" width="7.6791" height="10.514" ry="2.0745" stroke-width=".63013" style="paint-order:normal" />
                         <rect id="rect8075-2-1" x="755.41" y="42.314" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-4-5-2" x="755.39" y="50.038" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-7-5-1" transform="rotate(90)" x="42.291" y="-758.01" width="10.536" height="2.6199" ry="1.31" stroke-width=".68366" style="paint-order:normal" />
                     </g>
-                    <g id="couch-6" class="couch location" transform="matrix(0 1.175 -1.175 0 805.83 -818.45)" onclick="selectLocation(this.id)">
+                    <g id="couch-6" class="couch location" transform="matrix(0 1.175 -1.175 0 805.83 -818.45)" >
                         <rect id="rect8073-3" x="755.4" y="42.302" width="7.6791" height="10.514" ry="2.0745" stroke-width=".63013" style="paint-order:normal" />
                         <rect id="rect8075-2" x="755.41" y="42.314" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-4-5" x="755.39" y="50.038" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-7-5" transform="rotate(90)" x="42.291" y="-758.01" width="10.536" height="2.6199" ry="1.31" stroke-width=".68366" style="paint-order:normal" />
                     </g>
-                    <g id="couch-7" class="couch location" transform="matrix(1.175 0 0 1.175 -149.34 52.984)" onclick="selectLocation(this.id)">
+                    <g id="couch-7" class="couch location" transform="matrix(1.175 0 0 1.175 -149.34 52.984)" >
                         <rect id="rect8073-3-3" x="755.4" y="42.302" width="7.6791" height="10.514" ry="2.0745" stroke-width=".63013" style="paint-order:normal" />
                         <rect id="rect8075-2-18" x="755.41" y="42.314" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-4-5-25" x="755.39" y="50.038" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-7-5-21" transform="rotate(90)" x="42.291" y="-758.01" width="10.536" height="2.6199" ry="1.31" stroke-width=".68366" style="paint-order:normal" />
                     </g>
-                    <g id="couch-8" class="couch location" transform="matrix(-1.175 0 0 -1.175 1753.5 187.14)" onclick="selectLocation(this.id)">
+                    <g id="couch-8" class="couch location" transform="matrix(-1.175 0 0 -1.175 1753.5 187.14)" >
                         <rect id="rect8073-3-27" x="755.4" y="42.302" width="7.6791" height="10.514" ry="2.0745" stroke-width=".63013" style="paint-order:normal" />
                         <rect id="rect8075-2-3" x="755.41" y="42.314" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
                         <rect id="rect8075-4-5-69" x="755.39" y="50.038" width="9.0264" height="2.7898" ry="1.3949" stroke-width=".65299" style="paint-order:normal" />
@@ -999,42 +1002,9 @@
         </svg>
     </div>
 
-<script type="text/javascript">
 
-    var allLocations = document.getElementsByClassName("location");
-    for (i = 0; i < allLocations.length; i++) {
-        allLocations[i].addEventListener("click", doSomething);
-        var locationDropdown = document.getElementById("LocationId");
-        locationDropdown.addEventListener("change", doDropdownStuff);
-    }
-
-    function selectLocation(value) {
-        document.getElementById('LocationId').value = value;
-        var temp = document.getElementById(value);
-        document.getElementById('demo-box').innerHTML = temp.id;
-    }
-
-
-    function doSomething() {
-        var allLocations = document.getElementsByClassName("location");
-        for (i = 0; i < allLocations.length; i++) {
-            allLocations[i].style.fill = '#d3d3d3';
-        }
-        this.style.fill = 'red';
-    }
-
-    function doDropdownStuff() {
-
-        var allLocations = document.getElementsByClassName("location");
-        for (i = 0; i < allLocations.length; i++) {
-            allLocations[i].style.fill = '#d3d3d3';
-        }
-        var element = document.getElementById(this.value);
-        element.style.fill = 'red';
-    }
-
-</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/homeScripts.js")
 }
