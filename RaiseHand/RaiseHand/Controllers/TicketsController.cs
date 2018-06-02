@@ -507,12 +507,13 @@ namespace RaiseHand.Controllers
         }*/
 
         //Version 2.0
+        //Note: TicketNumbers table starts with an id of 1 (not 0)
         public string GenerateTicketNumber(int id)
         {
             string number;
             int count = db.TicketNumbers.Count();
 
-            int locateId = id % count;
+            int locateId = (id % count) + 1;
 
             number = db.TicketNumbers.Find(locateId).Name.ToString();
 
