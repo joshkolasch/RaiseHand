@@ -202,12 +202,12 @@ namespace RaiseHand.Controllers
                 return HttpNotFound();
             }
 
+            //Ticket found but inactive because tutor took it down
             var inactiveStatus = db.Statuses.Where(x => x.Name == "Inactive").First().Id;
             if (ticket.StatusId == inactiveStatus)
             {
                 //Ticket has been rendered inactive.
-                //TODO: consider outputting a message that says this ticket has been removed?
-                return HttpNotFound();
+                return RedirectToAction("HandLowered", new { id = id });
             }
 
             var totalHandsRaised = CountHandsRaised();
@@ -216,6 +216,7 @@ namespace RaiseHand.Controllers
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ticket.LocationId);
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", ticket.SubjectId);
 
+            Response.AddHeader("Refresh", "60");
             return View(ticket);
         }
         
@@ -227,12 +228,57 @@ namespace RaiseHand.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Ticket ticket = db.Tickets.Find(id);
             if (ticket == null)
             {
                 return HttpNotFound();
             }
+
+            string reasonLowered = ticket.ReasonLowered.Name;
+            string response = "";
+
+            if (reasonLowered.Equals("TutorSelectedNotFound"))
+            {
+                response = "A tutor has lowered your hand because they couldn't find you. Would you like to keep it down?";
+            }
+            else if (reasonLowered.Equals("TutorSelectedHelped"))
+            {
+                response = "A tutor has lowered your hand because they say you've been helped. Is this correct?";
+            }
+            ViewBag.reasonLoweredResponse = response;
+
+            if (response.Equals(""))
+            {
+                return HttpNotFound();
+            }
+
             return View(ticket);
+        }
+
+        public ActionResult ReactivateTicket(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Ticket ticket = db.Tickets.Find(id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+
+            var activeStatus = db.Statuses.Where(x => x.Name == "Active").First();
+            //TODO: do I need to change the Status? Or will changing the StatusId automatically change the Status?
+            //I think that I only need to update the status because the classes aren't saved, they are only updated when I pull them from the database.
+            //ticket.Status = activeStatus;
+            ticket.StatusId = activeStatus.Id;
+
+            db.Entry(ticket).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("HandRaised", new { id = id });
         }
 
         //TODO: I couldn't get this to run as an HttpPost. Should I be doing this as a post? There is no form necessary. Also, for Nevermind() and Unhelped() actionlinks.
@@ -419,12 +465,16 @@ namespace RaiseHand.Controllers
             try
             {
                 var pacificTimeTickets = GetPacificTime(activeTickets);
+                //Auto refresh every minute
+                //TODO: In final version change to refresh to 5 minutes. (or better yet have the refresh time as a setting for the tutors/admins)
+                Response.AddHeader("Refresh", "60");
                 return View(pacificTimeTickets.ToList());
             }
             catch (NullReferenceException e)
             {
                 //TODO: this should either return an error, or return a more descriptive page than HttpNotFound
                 //It should fail gracefully if the function doesn't work properly.
+                
                 return HttpNotFound();
             }
         }
@@ -490,7 +540,7 @@ namespace RaiseHand.Controllers
             db.SaveChanges();
             return RedirectToAction("TicketManager", "Tickets");
         }
-
+        
         //Version 1.0
         //TODO: This method should be replaced with a better method of generating/selecting ticket numbers to issue to students
         /*public string GenerateTicketNumber()

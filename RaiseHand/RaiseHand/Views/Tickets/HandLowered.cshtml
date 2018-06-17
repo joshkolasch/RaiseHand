@@ -1,0 +1,23 @@
+﻿@model RaiseHand.Models.Ticket
+
+@{
+    ViewBag.Title = "HandLowered";
+}
+
+<br />
+<br />
+<div class="row">
+    <p style="font-size:medium;">@ViewBag.reasonLoweredResponse</p>
+</div>
+
+<div class="row">
+    
+    <div class="col-md-6">
+        @Html.ActionLink("Yes, lower my hand.", "Feedback", "Home", null, new { @class = "btn btn-info" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.ActionLink("No, keep my hand raised.", "ReactivateTicket", "Tickets", new { @Model.Id }, new { @class = "btn btn-info" })
+    </div>
+</div>
+

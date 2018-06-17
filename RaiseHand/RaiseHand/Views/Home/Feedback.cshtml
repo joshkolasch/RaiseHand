@@ -3,9 +3,10 @@
     ViewBag.Title = "Feedback";
 }
 
-<div class="banner">
-    <img src="~/Content/Images/hands_colorful.png" alt="Hands Image" style="width:50%; height:auto;" />
-</div>
+@*<div class="banner">
+        <img src="~/Content/Images/hands_colorful.png" alt="Hands Image" style="width:50%; height:auto;" />
+    </div>*@
+
 <div class="jumbotron">
     @*<p class="raise-hand-banner"> <img src="~/Content/Images/hands_colorful.png" alt="Hands Image" /></p>*@
     <h2>Leave us feedback.</h2>
@@ -23,6 +24,6 @@
         Insert Comment Box here:
     </p>
     <br />
-    @Html.ActionLink("Home", "Home", "Tickets", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Home", "Home", "Tickets", null, new { @class = "btn btn-primary" })
 
 </div>

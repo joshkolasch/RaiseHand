@@ -7,37 +7,55 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="margin:0; padding:0; height:100%;">
     @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>*@
+        </div>*@
     @*<div class="navbar navbar-fixed-top">
-        <div class="container">
-            <div>
-                <img src="~/Content/Images/hands_colorful.png" alt="Colorful Hands Raised" style="background-repeat:repeat-x;"/>
+            <div class="container">
+                <div>
+                    <img src="~/Content/Images/hands_colorful.png" alt="Colorful Hands Raised" style="background-repeat:repeat-x;"/>
+                </div>
             </div>
-        </div>
 
-    </div>*@
-    <div class="img-responsive" style="width:95%; height:200px; background-image:url(../../Content/Images/hands_colorful.png); background-size:contain; background-repeat:repeat-x; margin:0 auto;">
-
+        </div>*@
+    @*<div class="img-responsive" style="width:95%; height:200px; background-image:url(../../Content/Images/hands_colorful.png); background-size:contain; background-repeat:repeat-x; margin:0 auto;">
+        </div>*@
+    <div class="row" style="background-color:#00aad4;">
+        <img class="col-md-offset-2 col-md-8 img-responsive"src="~/Content/Images/TitleBannerOptimized.svg" style="max-height:80%;" />
     </div>
+
+    @*<div class="banner">
+            <div class="row" style="width:95%; text-align:center;">
+                <div class="col-md-4" style="height:200px; background-image:url(../../Content/Images/hands_colorful.png); background-size:contain; background-repeat:repeat-x; margin:0 auto;">
+
+                </div>
+                <div class="col-md-4" style="margin:0 auto; text-align:center; font-size:5.0vw;">
+                    RaiseHand
+                </div>
+                <div class="col-md-4" style="height:200px; background-image:url(../../Content/Images/hands_colorful.png); background-size:contain; background-repeat:repeat-x; margin:0 auto;">
+
+                </div>
+
+            </div>
+
+        </div>*@
     <div class="container-fluid body-content" style="margin-left:5%; margin-right:5%;">
         @RenderBody()
         <hr />
