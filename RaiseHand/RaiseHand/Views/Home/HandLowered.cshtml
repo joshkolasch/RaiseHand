@@ -3,25 +3,25 @@
     ViewBag.Title = "HandLowered";
 }
 
-<div class="banner">
-    <img src="~/Content/Images/hands_colorful.png" alt="Hands Image" style="width:50%; height:auto;" />
-</div>
-<div class="jumbotron">
-    @*<p class="raise-hand-banner"> <img src="~/Content/Images/hands_colorful.png" alt="Hands Image" /></p>*@
-    <h1>Raise Hand</h1>
-</div>
-
 
 <div class="row">
-    <p>Your hand has been lowered by a tutor. Is this accurate?</p>
+    <p>@ViewBag.reasonLoweredResponse</p>
 </div>
 
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
         <p><a class="btn btn-default" href="~/Home/Index" style="background-color:dodgerblue; color:white;">Yes</a></p>
 
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
         <p><a class="btn btn-default" href="~/Home/HandRaised" style="background-color:dodgerblue; color:white;">No</a></p>
+    </div>
+
+    <div class="col-md-3">
+        @Html.ActionLink("Yes, lower my hand.", "Feedback", "Home", null, new { @class = "btn btn-default" })
+    </div>
+
+    <div class="col-md-3">
+        @Html.ActionLink("No, keep my hand raised.", "ReactivateTicket", "Tickets", null, new { @class = "btn btn-default" })
     </div>
 </div>
